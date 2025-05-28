@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bubbles Love ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
       display: flex;
@@ -16,30 +17,31 @@
       background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
       background-size: cover;
       background-attachment: fixed;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Pacifico', cursive;
       text-align: center;
       overflow: hidden;
       position: relative;
     }
+
     .message {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-      font-size: 28px;
-      color: #d63384;
-      font-weight: bold;
-      margin-bottom: 25px;
-      transition: transform 0.3s ease;
-      animation: bounce 1s infinite;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 25px 40px;
+      border-radius: 20px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+      font-size: 32px;
+      color: #ff3399;
+      font-weight: normal;
+      animation: fadeSlide 2s ease-out;
+      opacity: 0;
+      animation-fill-mode: forwards;
+      margin-bottom: 20px;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .message:hover {
-      transform: scale(1.1);
-    }
+
     .text-bubble {
       position: absolute;
       font-size: 18px;
@@ -52,11 +54,13 @@
       animation: floatText 8s ease-in-out forwards;
       white-space: nowrap;
     }
+
     @keyframes floatText {
       0% { opacity: 0; transform: scale(0.5) translateY(0px); }
       50% { opacity: 1; transform: scale(1.2) translateY(-50px); }
       100% { opacity: 0; transform: scale(1) translateY(-100px); }
     }
+
     #balloons-container {
       position: absolute;
       top: 0;
@@ -66,20 +70,24 @@
       height: 100%;
       overflow: hidden;
     }
+
     .balloon {
       position: absolute;
-      bottom: -100px;
+      bottom: -120px;
       width: 50px;
       height: 70px;
       background: radial-gradient(circle at 50% 50%, #ff99b6, #ff6699);
-      border-radius: 50% 50% 50% 50%;
-      animation: floatUp 10s infinite;
+      border-radius: 50%;
+      animation: floatUp 10s ease-in infinite;
       opacity: 0.8;
     }
+
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      100% { transform: translateY(-120vh) scale(1.2); opacity: 0.3; }
+      0% { transform: translateY(0) translateX(0) rotate(0deg); }
+      50% { transform: translateY(-60vh) translateX(20px) rotate(10deg); }
+      100% { transform: translateY(-120vh) translateX(-10px) rotate(-10deg); }
     }
+
     #fireworks-container {
       position: absolute;
       top: 0;
@@ -88,6 +96,7 @@
       height: 100%;
       pointer-events: none;
     }
+
     .firework {
       position: absolute;
       border-radius: 50%;
@@ -96,10 +105,12 @@
       height: 10px;
       animation: explode 1s ease-out forwards;
     }
+
     @keyframes explode {
       0% { transform: scale(0); opacity: 1; }
       100% { transform: scale(5); opacity: 0; }
     }
+
     @media (max-width: 768px) {
       body {
         background-size: cover;
@@ -111,7 +122,7 @@
   </style>
 </head>
 <body>
-  <div class="message">HAPPY BIRTHDAY JESSICA ❤️</div>
+  <div class="message">Happy Birthday Jessica 🎂</div>
   <div id="bubbles-text"></div>
   <div id="balloons-container"></div>
   <div id="fireworks-container"></div>
@@ -156,21 +167,19 @@
       balloon.className = "balloon";
       balloon.style.left = Math.random() * 100 + "vw";
       balloon.style.animationDelay = Math.random() * 5 + "s";
-      const container = document.getElementById("balloons-container");
-      container.appendChild(balloon);
+      document.getElementById("balloons-container").appendChild(balloon);
       setTimeout(() => {
         balloon.remove();
-      }, 10000);
+      }, 12000);
     }
-    setInterval(createBalloon, 1000);
+    setInterval(createBalloon, 800);
 
     function createFirework() {
       const firework = document.createElement("div");
       firework.className = "firework";
       firework.style.left = Math.random() * 100 + "vw";
       firework.style.top = Math.random() * 100 + "vh";
-      const container = document.getElementById("fireworks-container");
-      container.appendChild(firework);
+      document.getElementById("fireworks-container").appendChild(firework);
       setTimeout(() => {
         firework.remove();
       }, 1000);
