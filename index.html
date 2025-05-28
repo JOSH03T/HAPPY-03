@@ -1,182 +1,501 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
+  <title>Happy Birthday Jessica 🎂</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bubbles Love ❤️</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      /* Fondo de corazones */
       background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
       background-size: cover;
       background-attachment: fixed;
-      font-family: 'Arial', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Verdana, Arial, sans-serif;
       text-align: center;
       overflow: hidden;
       position: relative;
     }
-    .message {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-      font-size: 28px;
-      color: #d63384;
-      font-weight: bold;
-      margin-bottom: 25px;
-      transition: transform 0.3s ease;
-      animation: bounce 1s infinite;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    .message:hover {
-      transform: scale(1.1);
-    }
-    .text-bubble {
-      position: absolute;
-      font-size: 18px;
-      font-family: 'Cursive', sans-serif;
-      color: #d63384;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 10px 20px;
-      border-radius: 25px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: floatText 8s ease-in-out forwards;
-      white-space: nowrap;
-    }
-    @keyframes floatText {
-      0% { opacity: 0; transform: scale(0.5) translateY(0px); }
-      50% { opacity: 1; transform: scale(1.2) translateY(-50px); }
-      100% { opacity: 0; transform: scale(1) translateY(-100px); }
-    }
-    #balloons-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
+    .cake-card {
+      background: #18171c;
+      border-radius: 32px;
+      box-shadow: 0 8px 36px #0002;
+      padding: 16px 16px 30px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 410px;
+      min-height: 410px;
+      max-height: 510px;
+      height: 500px;
+      position: relative;
       overflow: hidden;
+      justify-content: flex-end;
+      z-index: 10;
     }
+    /* Globos */
     .balloon {
       position: absolute;
-      bottom: -100px;
-      width: 50px;
-      height: 70px;
-      background: radial-gradient(circle at 50% 50%, #ff99b6, #ff6699);
-      border-radius: 50% 50% 50% 50%;
-      animation: floatUp 10s infinite;
-      opacity: 0.8;
-    }
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 0.8; }
-      100% { transform: translateY(-120vh) scale(1.2); opacity: 0.3; }
-    }
-    #fireworks-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      z-index: 21;
       pointer-events: none;
+      width: 38px; height: 52px;
+      opacity: 0.93;
+      transition: opacity 0.9s linear;
     }
-    .firework {
+    .balloon-shape {
+      width: 38px; height: 46px;
+      background: radial-gradient(circle at 60% 30%, #fff6 12%, transparent 75%), var(--color, #ff4d78);
+      border-radius: 60% 60% 60% 60%/70% 70% 100% 100%;
+      box-shadow: 0 2px 8px #0002;
+      position: relative;
+    }
+    .balloon-string {
+      width: 2.5px; height: 23px;
+      background: repeating-linear-gradient(180deg, #aaa 0 7px, #ffd 7px 11px);
+      border-radius: 10px;
       position: absolute;
+      left: 50%; margin-left: -1.25px;
+      top: 43px;
+      z-index: 5;
+    }
+    /* Pastel */
+    .cake-plate {
+      width: 270px;
+      height: 22px;
+      background: #dde6e5;
+      border-radius: 0 0 130px 130px/0 0 44px 44px;
+      position: absolute;
+      bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 1;
+      box-shadow: 0 4px 12px #bbb8;
+    }
+    .cake {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+      margin-bottom: 0;
+      z-index: 2;
+      position: relative;
+      padding-bottom: 0;
+    }
+    .cake-layer {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0px;
+      z-index: 5;
+    }
+    .top-layer {
+      width: 110px;
+      height: 48px;
+      background: #6b3a1d;
+      border-radius: 18px 18px 32px 32px / 22px 22px 40px 40px;
+      margin-bottom: 0px;
+      box-shadow: 0 4px 14px #0003;
+      z-index: 7;
+    }
+    .drip-top {
+      position: absolute;
+      top: 26px; left: 0;
+      width: 100%;
+      height: 32px;
+      background: #fb87d5;
+      border-radius: 0 0 33px 33px / 0 0 25px 25px;
+      z-index: 8;
+      clip-path: polygon(
+        0 0, 100% 0, 100% 80%, 93% 70%, 88% 100%, 77% 72%, 70% 96%,
+        60% 62%, 52% 95%, 44% 74%, 39% 98%, 27% 63%, 15% 100%, 10% 80%, 0 90%
+      );
+    }
+    .cake-text-top {
+      color: #fff;
+      font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      position: absolute;
+      width: 100%;
+      top: 8px;
+      text-align: center;
+      z-index: 11;
+      text-shadow: 0 1px 3px #0007;
+    }
+    .middle-layer {
+      width: 175px;
+      height: 52px;
+      background: #ffb34e;
+      border-radius: 18px 18px 35px 35px / 22px 22px 40px 40px;
+      margin-top: -8px;
+      margin-bottom: 0px;
+      box-shadow: 0 4px 12px #0002;
+      z-index: 6;
+      display: flex; align-items: flex-end; justify-content: center;
+      position: relative;
+      border-bottom: 6px solid #ffdb94;
+    }
+    .drip-mid {
+      position: absolute;
+      top: 24px; left: 0;
+      width: 100%;
+      height: 34px;
+      background: #4e2615;
+      border-radius: 0 0 35px 35px / 0 0 30px 30px;
+      z-index: 8;
+      clip-path: polygon(
+        0 0, 100% 0, 100% 70%, 94% 90%, 88% 100%, 82% 77%, 72% 98%,
+        62% 74%, 53% 98%, 42% 82%, 33% 100%, 23% 71%, 11% 100%, 6% 80%, 0 92%
+      );
+    }
+    .cake-text-mid {
+      color: #fff;
+      font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      position: absolute;
+      width: 100%;
+      top: 13px;
+      text-align: center;
+      z-index: 11;
+      text-shadow: 0 1px 3px #0008;
+    }
+    .bottom-layer {
+      width: 250px;
+      height: 65px;
+      background: #a35b2a;
+      border-radius: 22px 22px 70px 70px / 34px 34px 45px 45px;
+      margin-top: -10px;
+      margin-bottom: 0;
+      box-shadow: 0 5px 14px #0002;
+      z-index: 5;
+      position: relative;
+      border-bottom: 7px solid #ffdfc2;
+    }
+    .drip-bot {
+      position: absolute;
+      top: 26px; left: 0;
+      width: 100%;
+      height: 42px;
+      background: #ff69b3;
+      border-radius: 0 0 70px 70px / 0 0 60px 60px;
+      z-index: 8;
+      clip-path: polygon(
+        0 0, 100% 0, 100% 80%, 93% 65%, 87% 100%, 79% 80%, 69% 98%, 62% 69%,
+        54% 97%, 46% 80%, 39% 99%, 27% 75%, 15% 100%, 10% 80%, 0 92%
+      );
+    }
+    .cake-text-bot {
+      color: #fff;
+      font-family: 'Segoe UI', Verdana, Arial, sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      position: absolute;
+      width: 100%;
+      top: 17px;
+      text-align: center;
+      z-index: 10;
+      text-shadow: 0 1px 3px #0008;
+    }
+    /* Cerezas */
+    .cherry {
+      position: absolute;
+      width: 16px; height: 16px;
+      background: #ff407c;
       border-radius: 50%;
-      background: radial-gradient(circle, yellow, transparent);
-      width: 10px;
-      height: 10px;
-      animation: explode 1s ease-out forwards;
+      border: 2px solid #fff;
+      top: 5px;
+      left: 50%;
+      margin-left: -8px;
+      z-index: 30;
+      box-shadow: 0 2px 6px #d9337b, 0 0px 8px #fff6;
+      display: flex; align-items: center; justify-content: center;
     }
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(5); opacity: 0; }
+    .cherry.stem {
+      width: 2px; height: 14px;
+      background: linear-gradient(#99d38e, #496b3c);
+      position: absolute; top: -13px; left: 50%; margin-left: -1px;
+      border-radius: 1px;
+      z-index: 31;
     }
-    @media (max-width: 768px) {
-      body {
-        background-size: cover;
-        background-position: center top;
-      }
-      .message { font-size: 24px; padding: 20px; }
-      .text-bubble { font-size: 16px; padding: 8px 16px; }
+    .cherry.ch1 { left: 18%; }
+    .cherry.ch2 { left: 49%; }
+    .cherry.ch3 { left: 80%; }
+    .cherry.ch4 { left: 36%; }
+    .cherry.ch5 { left: 62%; }
+    /* Velas */
+    .velas {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      position: absolute;
+      top: -38px; left: 50%; transform: translateX(-50%);
+      z-index: 50;
+    }
+    .vela {
+      width: 13px;
+      height: 32px;
+      background: repeating-linear-gradient(135deg, #fff 0 4px, #ffbb70 4px 8px);
+      border-radius: 7px 7px 7px 7px / 11px 11px 6px 6px;
+      box-shadow: 0 2px 7px #0004;
+      position: relative;
+    }
+    .llama {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 13px; height: 13px;
+      z-index: 2;
+    }
+    .flama {
+      width: 11px;
+      height: 12px;
+      background: radial-gradient(ellipse at center, #fffca0 60%, #ffe066 80%, #ffc800 100%, transparent 100%);
+      border-radius: 50% 50% 60% 60%/60% 60% 100% 100%;
+      animation: flame-flicker 1.15s infinite linear alternate;
+      filter: blur(0.3px) drop-shadow(0 1px 6px #fff36a);
+      opacity: 0.94;
+    }
+    @keyframes flame-flicker {
+      0% { transform: scaleY(1) scaleX(1) rotate(-3deg);}
+      20% { transform: scaleY(1.09) scaleX(0.96) rotate(3deg);}
+      40% { transform: scaleY(0.96) scaleX(1.07) rotate(-4deg);}
+      60% { transform: scaleY(1.13) scaleX(1) rotate(1deg);}
+      80% { transform: scaleY(1.04) scaleX(0.98) rotate(-2deg);}
+      100% { transform: scaleY(1.07) scaleX(1.09) rotate(3deg);}
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .cake-card { min-width: 94vw; }
+      .cake-plate { width: 70vw; }
+      .bottom-layer { width: 65vw; }
+      .middle-layer { width: 43vw; }
+      .top-layer { width: 28vw; }
     }
   </style>
 </head>
 <body>
-  <div class="message">HAPPY BIRTHDAY JESSICA ❤️</div>
-  <div id="bubbles-text"></div>
-  <div id="balloons-container"></div>
-  <div id="fireworks-container"></div>
-
+  <!-- MÚSICA DE FONDO (no visible) -->
   <audio id="bg-music" autoplay loop>
     <source src="audio/See_you_again.mp3" type="audio/mpeg">
     Tu navegador no soporta audio.
   </audio>
-
+  <!-- TARJETA DE PASTEL -->
+  <div class="cake-card" id="cake-card">
+    <canvas class="firework-canvas"></canvas>
+    <div class="cake">
+      <div class="cake-layer top-layer">
+        <div class="velas">
+          <div class="vela"><div class="llama"><div class="flama"></div></div></div>
+          <div class="vela"><div class="llama"><div class="flama"></div></div></div>
+        </div>
+        <div class="drip-top"></div>
+        <div class="cake-text-top">Happy</div>
+      </div>
+      <div class="cake-layer middle-layer">
+        <div class="drip-mid"></div>
+        <div class="cake-text-mid">Birthday</div>
+        <div class="cherry cherry ch1"><div class="cherry stem"></div></div>
+        <div class="cherry cherry ch2"><div class="cherry stem"></div></div>
+        <div class="cherry cherry ch3"><div class="cherry stem"></div></div>
+      </div>
+      <div class="cake-layer bottom-layer">
+        <div class="drip-bot"></div>
+        <div class="cake-text-bot">Jessica</div>
+        <div class="cherry cherry ch4"><div class="cherry stem"></div></div>
+        <div class="cherry cherry ch5"><div class="cherry stem"></div></div>
+      </div>
+    </div>
+    <div class="cake-plate"></div>
+  </div>
   <script>
-    const messages = [
-      "Feliz cumpleaños Jessica ❤️",
-      "Eres increíble ✨",
-      "Que tu día esté lleno de amor 💖",
-      "Brilla siempre, Jessica",
-      "Un abrazo enorme en tu día",
-      "Sigue sonriendo 😊",
-      "Hoy celebramos tu alegría",
-      "Eres un regalo para todos",
-      "Brilla con luz propia",
-      "Mi corazón es tuyo 💘"
-    ];
-
-    function createTextBubble() {
-      const bubble = document.createElement("div");
-      bubble.className = "text-bubble";
-      bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
-      const left = Math.random() * 80 + 10;
-      const top = Math.random() * 80 + 10;
-      bubble.style.left = left + "vw";
-      bubble.style.top = top + "vh";
-      const container = document.getElementById("bubbles-text");
-      container.appendChild(bubble);
-      setTimeout(() => {
-        bubble.remove();
-      }, 8000);
-    }
-    setInterval(createTextBubble, 500);
-
+    // GLOBOS DENTRO DEL CUADRO
+    const colors = ['#ff507c','#ffae3b','#71d1f5','#d866fe','#fae661','#60db95','#e86464','#a59df9'];
     function createBalloon() {
-      const balloon = document.createElement("div");
+      const card = document.getElementById('cake-card');
+      const balloon = document.createElement('div');
       balloon.className = "balloon";
-      balloon.style.left = Math.random() * 100 + "vw";
-      balloon.style.animationDelay = Math.random() * 5 + "s";
-      const container = document.getElementById("balloons-container");
-      container.appendChild(balloon);
-      setTimeout(() => {
-        balloon.remove();
-      }, 10000);
+      // Calcula posición x dentro del card, pero no pegado a los bordes
+      const cardRect = card.getBoundingClientRect();
+      const minX = 10;
+      const maxX = cardRect.width - 45;
+      const left = Math.random() * (maxX - minX) + minX;
+      balloon.style.left = `${left}px`;
+      // Color random
+      const color = colors[Math.floor(Math.random()*colors.length)];
+      balloon.innerHTML = `
+        <div class="balloon-shape" style="background:radial-gradient(circle at 60% 30%, #fff6 12%, transparent 75%), ${color};"></div>
+        <div class="balloon-string"></div>`;
+      card.appendChild(balloon);
+      // Animar (usar JS para mayor control)
+      let bottom = -60;
+      let opacity = 0.97;
+      let t = 0;
+      let maxHeight = cardRect.height - 130 - Math.random()*40; // altura random, no sobrepasa el card
+      function float() {
+        t += 1;
+        bottom += 1.2 + Math.sin(t/10)*0.4;
+        balloon.style.bottom = `${bottom}px`;
+        if (bottom > maxHeight) opacity -= 0.03;
+        balloon.style.opacity = opacity;
+        if (opacity <= 0.03) { balloon.remove(); return; }
+        requestAnimationFrame(float);
+      }
+      float();
+      // Se elimina después de unos segundos por seguridad
+      setTimeout(()=>{ if (balloon.parentNode) balloon.remove(); }, 8200);
     }
-    setInterval(createBalloon, 1000);
+    setInterval(createBalloon, 1100);
 
-    function createFirework() {
-      const firework = document.createElement("div");
-      firework.className = "firework";
-      firework.style.left = Math.random() * 100 + "vw";
-      firework.style.top = Math.random() * 100 + "vh";
-      const container = document.getElementById("fireworks-container");
-      container.appendChild(firework);
-      setTimeout(() => {
-        firework.remove();
-      }, 1000);
+    // FUEGOS ARTIFICIALES: COHETE QUE SUBE Y LUEGO EXPLOTA
+    const canvas = document.querySelector('.firework-canvas');
+    const ctx = canvas.getContext('2d');
+    let dpr = window.devicePixelRatio || 1;
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = rect.width + "px";
+      canvas.style.height = rect.height + "px";
     }
-    setInterval(createFirework, 3000);
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
+    function randomColor() {
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+    class Particle {
+      constructor(x, y, color, angle, speed) {
+        this.x = x; this.y = y;
+        this.radius = Math.random() * 2.1 + 1.4;
+        this.color = color;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha = 1;
+        this.life = 0;
+        this.gravity = 0.012 * dpr;
+        this.sparkle = Math.random() < 0.47;
+      }
+      update() {
+        this.x += this.vx * dpr;
+        this.y += this.vy * dpr;
+        this.vy += this.gravity;
+        this.alpha -= 0.011 + Math.random()*0.009;
+        this.life++;
+      }
+      draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = Math.max(this.alpha, 0);
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = this.sparkle ? 12 : 6;
+        ctx.fill();
+        ctx.restore();
+        // Bengalas
+        if(this.sparkle && this.life < 16) {
+          ctx.save();
+          ctx.strokeStyle = this.color;
+          ctx.globalAlpha = 0.37 * this.alpha;
+          ctx.lineWidth = 1.05;
+          for(let i=0;i<5;i++) {
+            const ang = (Math.PI*2/5)*i;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(this.x + Math.cos(ang)*13, this.y + Math.sin(ang)*13);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+      }
+    }
+    class Firework {
+      constructor(x0, y0, x1, y1, color) {
+        this.x = x0; this.y = y0;
+        this.targetX = x1; this.targetY = y1;
+        this.state = 'ascending'; // or 'exploding'
+        this.color = color || randomColor();
+        this.speed = 4 + Math.random()*1.4;
+        this.vx = (x1-x0)/65;
+        this.vy = (y1-y0)/65;
+        this.particles = [];
+        this.trail = [];
+        this.age = 0;
+      }
+      update(ctx) {
+        if(this.state === 'ascending') {
+          // Dibujar cohete como punto blanco
+          ctx.save();
+          ctx.globalAlpha = 0.77;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 3.4, 0, 2 * Math.PI, false);
+          ctx.fillStyle = '#fff';
+          ctx.shadowColor = this.color;
+          ctx.shadowBlur = 10;
+          ctx.fill();
+          ctx.restore();
+          // Traza
+          this.trail.push({x:this.x, y:this.y, alpha:0.45});
+          if(this.trail.length>12) this.trail.shift();
+          ctx.save();
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = 2.1;
+          ctx.globalAlpha = 0.19;
+          ctx.beginPath();
+          for(let t of this.trail) ctx.lineTo(t.x, t.y);
+          ctx.stroke();
+          ctx.restore();
+          // Mover cohete
+          this.x += this.vx * this.speed * dpr;
+          this.y += this.vy * this.speed * dpr;
+          this.age++;
+          // Explota al llegar al target
+          if (Math.abs(this.x - this.targetX) < 6 && Math.abs(this.y - this.targetY) < 8) {
+            this.state = 'exploding';
+            for(let i=0; i<32+Math.random()*13; i++) {
+              const angle = Math.random() * 2 * Math.PI;
+              const speed = 2.8 + Math.random()*1.6;
+              this.particles.push(new Particle(this.x, this.y, this.color, angle, speed));
+            }
+          }
+        } else if(this.state === 'exploding') {
+          this.particles.forEach(p => { p.update(); p.draw(ctx); });
+          this.particles = this.particles.filter(p => p.alpha > 0.05);
+        }
+      }
+      isAlive() {
+        return !(this.state === 'exploding' && this.particles.length === 0);
+      }
+    }
+    let fireworks = [];
+    function spawnFirework() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const startX = Math.random() * rect.width * 0.4 + rect.width * 0.3;
+      const startY = rect.height - 40;
+      const endX = startX + (Math.random()-0.5)*80;
+      const endY = rect.height * 0.40 + Math.random() * rect.height * 0.18;
+      fireworks.push(new Firework(startX*dpr, startY*dpr, endX*dpr, endY*dpr));
+    }
+    setInterval(spawnFirework, 1800);
+
+    function animateFireworks() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      fireworks.forEach(fw => fw.update(ctx));
+      fireworks = fireworks.filter(fw => fw.isAlive());
+      requestAnimationFrame(animateFireworks);
+    }
+    animateFireworks();
+
+    // Habilita autoplay en algunos dispositivos al tocar/click
     const audio = document.getElementById('bg-music');
     window.addEventListener('click', () => {
       if (audio.paused) {
