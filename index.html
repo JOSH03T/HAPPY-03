@@ -2,196 +2,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bubbles Love ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <title>Happy Birthday Jessica</title>
   <style>
+    /* 1) Fondo negro */
     body {
+      margin: 0;
+      background: #000;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
-      background-size: cover;
-      background-attachment: fixed;
-      font-family: 'Pacifico', cursive;
-      text-align: center;
-      overflow: hidden;
+    }
+    /* 2) Contenedor de letras */
+    #message {
       position: relative;
+      font-size: 3rem;
+      font-family: sans-serif;
+      display: flex;
+      gap: 0.2em;
     }
-
-    .message {
-      background: rgba(255, 255, 255, 0.75);
-      padding: 25px 40px;
-      border-radius: 20px;
-      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-      font-size: 32px;
-      color: #ff3399;
-      font-weight: normal;
-      animation: fadeSlide 2s ease-out;
+    /* 3) Cada letra */
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
       opacity: 0;
-      animation-fill-mode: forwards;
-      margin-bottom: 20px;
     }
-
-    @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(-40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .text-bubble {
-      position: absolute;
-      font-size: 18px;
-      font-family: 'Cursive', sans-serif;
-      color: #d63384;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 10px 20px;
-      border-radius: 25px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: floatText 8s ease-in-out forwards;
-      white-space: nowrap;
-    }
-
-    @keyframes floatText {
-      0% { opacity: 0; transform: scale(0.5) translateY(0px); }
-      50% { opacity: 1; transform: scale(1.2) translateY(-50px); }
-      100% { opacity: 0; transform: scale(1) translateY(-100px); }
-    }
-
-    #balloons-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .balloon {
-      position: absolute;
-      bottom: -120px;
-      width: 50px;
-      height: 70px;
-      background: radial-gradient(circle at 50% 50%, #ff99b6, #ff6699);
-      border-radius: 50%;
-      animation: floatUp 10s ease-in infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); }
-      50% { transform: translateY(-60vh) translateX(20px) rotate(10deg); }
-      100% { transform: translateY(-120vh) translateX(-10px) rotate(-10deg); }
-    }
-
-    #fireworks-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .firework {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, yellow, transparent);
-      width: 10px;
-      height: 10px;
-      animation: explode 1s ease-out forwards;
-    }
-
+    /* arcoíris */
+    .letter:nth-child(1)  { color: #e21414; }
+    .letter:nth-child(2)  { color: #e67e22; }
+    .letter:nth-child(3)  { color: #f1c40f; }
+    .letter:nth-child(4)  { color: #2ecc71; }
+    .letter:nth-child(5)  { color: #1abc9c; }
+    .letter:nth-child(6)  { color: #3498db; }
+    .letter:nth-child(7)  { color: #9b59b6; }
+    /* repetir arcoíris */
+    .letter:nth-child(8)  { color: #e21414; }
+    .letter:nth-child(9)  { color: #e67e22; }
+    .letter:nth-child(10) { color: #f1c40f; }
+    .letter:nth-child(11) { color: #2ecc71; }
+    .letter:nth-child(12) { color: #1abc9c; }
+    .letter:nth-child(13) { color: #3498db; }
+    .letter:nth-child(14) { color: #9b59b6; }
+    .letter:nth-child(15) { color: #e21414; }
+    .letter:nth-child(16) { color: #e67e22; }
+    .letter:nth-child(17) { color: #f1c40f; }
+    .letter:nth-child(18) { color: #2ecc71; }
+    .letter:nth-child(19) { color: #1abc9c; }
+    .letter:nth-child(20) { color: #3498db; }
+    .letter:nth-child(21) { color: #9b59b6; }
+    /* 4) Animación de explosión */
     @keyframes explode {
-      0% { transform: scale(0); opacity: 1; }
-      100% { transform: scale(5); opacity: 0; }
-    }
-
-    @media (max-width: 768px) {
-      body {
-        background-size: cover;
-        background-position: center top;
+      from {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
       }
-      .message { font-size: 24px; padding: 20px; }
-      .text-bubble { font-size: 16px; padding: 8px 16px; }
+      to {
+        transform: translate(var(--x), var(--y)) scale(1);
+        opacity: 1;
+      }
+    }
+    /* 5) Animación de flotar */
+    @keyframes floatUp {
+      0%   { transform: translate(var(--x), var(--y)) scale(1); opacity: 1; }
+      100% { transform: translate(calc(var(--x) + 0px), calc(var(--y) - 150vh)) scale(1); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="message">Happy Birthday Jessica 🎂</div>
-  <div id="bubbles-text"></div>
-  <div id="balloons-container"></div>
-  <div id="fireworks-container"></div>
-
-  <audio id="bg-music" autoplay loop>
-    <source src="audio/See_you_again.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
+  <div id="message"></div>
 
   <script>
-    const messages = [
-      "Feliz cumpleaños Jessica ❤️",
-      "Eres increíble ✨",
-      "Que tu día esté lleno de amor 💖",
-      "Brilla siempre, Jessica",
-      "Un abrazo enorme en tu día",
-      "Sigue sonriendo 😊",
-      "Hoy celebramos tu alegría",
-      "Eres un regalo para todos",
-      "Brilla con luz propia",
-      "Mi corazón es tuyo 💘"
-    ];
-
-    function createTextBubble() {
-      const bubble = document.createElement("div");
-      bubble.className = "text-bubble";
-      bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
-      const left = Math.random() * 80 + 10;
-      const top = Math.random() * 80 + 10;
-      bubble.style.left = left + "vw";
-      bubble.style.top = top + "vh";
-      const container = document.getElementById("bubbles-text");
-      container.appendChild(bubble);
+    const text = "HAPPY BIRTHDAY JESSICA";
+    const container = document.getElementById("message");
+    // 1) Crear un span por letra
+    text.split("").forEach((ch,i) => {
+      const span = document.createElement("span");
+      span.className = "letter";
+      span.textContent = ch;
+      // ángulo y radio aleatorio
+      const angle = Math.random() * 2 * Math.PI;
+      const dist = 200 + Math.random()*100;
+      const x = Math.cos(angle)*dist + "px";
+      const y = Math.sin(angle)*dist + "px";
+      span.style.setProperty("--x", x);
+      span.style.setProperty("--y", y);
+      container.appendChild(span);
+      // 2) Animar explosión y luego flotar
       setTimeout(() => {
-        bubble.remove();
-      }, 8000);
-    }
-    setInterval(createTextBubble, 500);
-
-    function createBalloon() {
-      const balloon = document.createElement("div");
-      balloon.className = "balloon";
-      balloon.style.left = Math.random() * 100 + "vw";
-      balloon.style.animationDelay = Math.random() * 5 + "s";
-      document.getElementById("balloons-container").appendChild(balloon);
-      setTimeout(() => {
-        balloon.remove();
-      }, 12000);
-    }
-    setInterval(createBalloon, 800);
-
-    function createFirework() {
-      const firework = document.createElement("div");
-      firework.className = "firework";
-      firework.style.left = Math.random() * 100 + "vw";
-      firework.style.top = Math.random() * 100 + "vh";
-      document.getElementById("fireworks-container").appendChild(firework);
-      setTimeout(() => {
-        firework.remove();
-      }, 1000);
-    }
-    setInterval(createFirework, 3000);
-
-    const audio = document.getElementById('bg-music');
-    window.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-      }
+        span.style.animation = `explode 0.8s ease-out forwards`;
+        // al finalizar explode, iniciar floatUp
+        span.addEventListener("animationend", () => {
+          span.style.animation = `floatUp 4s ease-in forwards`;
+        }, { once: true });
+      }, 100 * i); // desfase por letra
     });
   </script>
 </body>
 </html>
+
