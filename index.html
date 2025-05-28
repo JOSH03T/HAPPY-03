@@ -6,35 +6,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
-      background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
+      background: url('https://png.pngtree.com/background/20230414/original/pngtree-party-celebration-celebration-balloon-red-picture-image_2423892.jpg') no-repeat center center;
       background-size: cover;
       background-attachment: fixed;
+      font-family: 'Arial', sans-serif;
       min-height: 100vh;
       margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
       position: relative;
     }
+    #bubbles-text {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .text-bubble {
+      position: absolute;
+      font-size: 1.28rem;
+      font-family: 'Dancing Script', 'Cursive', sans-serif;
+      color: #d63384;
+      background-color: rgba(255, 255, 255, 0.83);
+      padding: 9px 20px;
+      border-radius: 25px;
+      box-shadow: 0 4px 12px #0002;
+      animation: floatText 8s ease-in-out forwards;
+      white-space: pre-line;
+      max-width: 500px;
+      min-width: 130px;
+      width: fit-content;
+      word-break: break-word;
+      z-index: 6;
+      border: 2px solid #fbb1de22;
+      text-align: left;
+    }
+    @keyframes floatText {
+      0% { opacity: 0; transform: scale(0.7) translateY(0px);}
+      15% { opacity: 1; transform: scale(1.09) translateY(-18px);}
+      80% { opacity: 1; transform: scale(1) translateY(-85px);}
+      100% { opacity: 0; transform: scale(0.96) translateY(-110px);}
+    }
+    /* Tarjeta del pastel */
     .cake-card {
       background: #18171c;
-      border-radius: 32px;
+      border-radius: 45px;
       box-shadow: 0 8px 36px #0002;
       padding: 16px 16px 30px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-width: 410px;
-      min-height: 410px;
-      max-height: 510px;
+      min-height: 470px;
+      max-height: 570px;
       height: 500px;
       position: relative;
       overflow: hidden;
       justify-content: flex-end;
-      z-index: 1000;
+      margin: 0 14px;
+      z-index: 10;
     }
     /* Globos */
     .balloon {
@@ -270,27 +302,59 @@
       80% { transform: scaleY(1.04) scaleX(0.98) rotate(-2deg);}
       100% { transform: scaleY(1.07) scaleX(1.09) rotate(3deg);}
     }
-    .text-bubble {
+    /* Botón regalo */
+    .gift-btn {
       position: absolute;
-      font-size: 18px;
-      font-family: 'Cursive', sans-serif;
-      color: #d63384;
-      background-color: rgba(255, 255, 255, 0.7);
-      padding: 10px 20px;
-      border-radius: 25px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      animation: floatText 8s ease-in-out forwards;
-      white-space: nowrap;
-      z-index: 10001;
-      pointer-events: none;
+      left: 50%; top: 35px;
+      transform: translateX(-50%);
+      z-index: 30;
+      cursor: pointer;
+      font-size: 5.4rem;
+      background: none;
+      border: none;
+      outline: none;
+      filter: drop-shadow(0 2px 7px #e5d23f8e);
+      transition: transform 0.2s;
+      padding: 0;
     }
-    @keyframes floatText {
-      0% { opacity: 0; transform: scale(0.5) translateY(0px); }
-      50% { opacity: 1; transform: scale(1.2) translateY(-50px); }
-      100% { opacity: 0; transform: scale(1) translateY(-100px); }
+    .gift-btn:hover { transform: translateX(-50%) scale(1.13);}
+    /* Tarjeta dedicatoria */
+    .dedicatoria-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.22);
+      z-index: 99;
+      display: flex;
+      align-items: center; justify-content: center;
     }
-    @media (max-width: 600px) {
-      .cake-card { min-width: 94vw; }
+    .dedicatoria-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 36px #0004;
+      max-width: 360px;
+      width: 94vw;
+      padding: 32px 22px 26px 22px;
+      text-align: center;
+      position: relative;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 1.21rem;
+      color: #c1447a;
+      animation: modalAppear 0.4s;
+    }
+    @keyframes modalAppear {
+      0% { transform: scale(0.8) translateY(50px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .dedicatoria-close {
+      position: absolute; right: 17px; top: 13px;
+      font-size: 1.35rem;
+      background: none; border: none;
+      color: #a666aa;
+      cursor: pointer;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .cake-card { min-width: 90vw; max-width: 99vw; }
       .cake-plate { width: 70vw; }
       .bottom-layer { width: 65vw; }
       .middle-layer { width: 43vw; }
@@ -299,15 +363,14 @@
   </style>
 </head>
 <body>
-  <!-- AUDIO -->
-  <audio id="bg-music" loop>
-    <source src="audio/See_you_again.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
+  <div id="bubbles-text"></div>
+
   <div class="cake-card" id="cake-card">
+    <button class="gift-btn" id="openGift" title="Haz clic para ver la dedicatoria">
+      🎁
+    </button>
     <!-- Fuegos artificiales -->
     <canvas class="firework-canvas"></canvas>
-    <!-- Globos animados -->
     <div class="cake">
       <!-- Capa superior -->
       <div class="cake-layer top-layer">
@@ -336,56 +399,66 @@
     </div>
     <div class="cake-plate"></div>
   </div>
+  <audio id="bg-music" autoplay loop>
+    <source src="audio/See_you_again.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+  <!-- Modal dedicatoria (oculto al inicio) -->
+  <div id="dedicatoria-modal" class="dedicatoria-modal" style="display:none;">
+    <div class="dedicatoria-card">
+      <button class="dedicatoria-close" onclick="document.getElementById('dedicatoria-modal').style.display='none';">✖</button>
+      <h3 style="margin-top:0">¡Feliz cumpleaños, Jessica! 🎂</h3>
+      <p>
+        Espero que este día esté lleno de momentos hermosos, sonrisas y sorpresas.<br>
+        Que la vida siempre te regale motivos para celebrar y mucha alegría para compartir.<br>
+        <span style="color:#f39;">¡Sigue brillando y cumpliendo sueños!</span>
+      </p>
+    </div>
+  </div>
   <script>
-    // MENSAJES FLOTANTES
+    // Mensajes positivos para la ocasión (sin romance)
     const messages = [
-      "Feliz cumpleaños Jessica ❤️",
-      "Eres increíble ✨",
-      "Que tu día esté lleno de amor 💖",
-      "Brilla siempre, Jessica",
-      "Un abrazo enorme en tu día",
-      "Sigue sonriendo 😊",
-      "Hoy celebramos tu alegría",
-      "Eres un regalo para todos",
-      "Brilla con luz propia",
-      "Mi corazón es tuyo 💘"
+      "¡Hoy se celebra tu vida!",
+      "Que la energía bonita te rodee",
+      "Disfruta tu día al máximo",
+      "Ríe, baila y sé feliz hoy",
+      "Un año más para crecer y brillar",
+      "Deseo que este año te traiga grandes alegrías",
+      "¡Sopla las velas y pide un deseo!",
+      "Cada año es una nueva aventura",
+      "Siempre hay un motivo para sonreír",
+      "Tu sonrisa es contagiosa 😁",
+      "Felicidades por ser una gran persona",
+      "¡Feliz cumpleaños, Jessica!",
+      "Que tus sueños se sigan cumpliendo",
+      "Tienes una energía única",
+      "Recuerda disfrutar cada momento",
+      "Que la vida te regale mucha salud y felicidad",
+      "Mereces un día espectacular",
+      "Hoy es tu día para brillar",
+      "Gracias por tu buena vibra siempre",
+      "Espero que lo pases genial",
+      "¡Haz de este año el mejor!"
     ];
-    function isInsideCard(x, y) {
-      const card = document.getElementById('cake-card');
-      const rect = card.getBoundingClientRect();
-      // Ajustar margen para que no toque el borde
-      return (
-        x + 180 > rect.left && x < rect.right &&
-        y + 60 > rect.top && y < rect.bottom
-      );
-    }
+
     function createTextBubble() {
       const bubble = document.createElement("div");
       bubble.className = "text-bubble";
       bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
-
-      let tries = 0;
-      let x, y;
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-
-      do {
-        x = Math.random() * (vw - 230);
-        y = Math.random() * (vh - 90);
-        tries++;
-        if (tries > 16) { x = 25; y = 25; break; }
-      } while (isInsideCard(x, y));
-
-      bubble.style.left = `${x}px`;
-      bubble.style.top = `${y}px`;
-      document.body.appendChild(bubble);
-      setTimeout(() => {
-        bubble.remove();
-      }, 8000);
+      // Aparece en lado izquierdo o derecho, pero visible
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const maxWidth = Math.min(vw * 0.58, 500);
+      const minLeft = 15;
+      const left = Math.random() * (vw - maxWidth - minLeft * 2) + minLeft;
+      bubble.style.left = `${left}px`;
+      bubble.style.top = (Math.random() * (vh * 0.39) + 10) + "px";
+      const container = document.getElementById("bubbles-text");
+      container.appendChild(bubble);
+      setTimeout(() => { bubble.remove(); }, 8100);
     }
-    setInterval(createTextBubble, 1300);
+    setInterval(createTextBubble, 1400);
 
-    // GLOBOS DENTRO DEL CUADRO
+    // Globos dentro de la tarjeta
     const colors = ['#ff507c','#ffae3b','#71d1f5','#d866fe','#fae661','#60db95','#e86464','#a59df9'];
     function createBalloon() {
       const card = document.getElementById('cake-card');
@@ -403,7 +476,7 @@
         <div class="balloon-shape" style="background:radial-gradient(circle at 60% 30%, #fff6 12%, transparent 75%), ${color};"></div>
         <div class="balloon-string"></div>`;
       card.appendChild(balloon);
-      // Animar (usar JS para mayor control)
+      // Animar
       let bottom = -60;
       let opacity = 0.97;
       let t = 0;
@@ -422,7 +495,7 @@
     }
     setInterval(createBalloon, 1100);
 
-    // FUEGOS ARTIFICIALES: COHETE QUE SUBE Y LUEGO EXPLOTA
+    // Fuegos artificiales
     const canvas = document.querySelector('.firework-canvas');
     const ctx = canvas.getContext('2d');
     let dpr = window.devicePixelRatio || 1;
@@ -489,7 +562,7 @@
       constructor(x0, y0, x1, y1, color) {
         this.x = x0; this.y = y0;
         this.targetX = x1; this.targetY = y1;
-        this.state = 'ascending'; // or 'exploding'
+        this.state = 'ascending';
         this.color = color || randomColor();
         this.speed = 4 + Math.random()*1.4;
         this.vx = (x1-x0)/65;
@@ -520,6 +593,7 @@
           for(let t of this.trail) ctx.lineTo(t.x, t.y);
           ctx.stroke();
           ctx.restore();
+          // Mover cohete
           this.x += this.vx * this.speed * dpr;
           this.y += this.vy * this.speed * dpr;
           this.age++;
@@ -559,14 +633,14 @@
     }
     animateFireworks();
 
-    // MUSICA
+    // Dedicatoria: abre/cierra
+    document.getElementById('openGift').onclick = function() {
+      document.getElementById('dedicatoria-modal').style.display = 'flex';
+    };
+
+    // Música: solo inicia si el usuario toca la pantalla
     const audio = document.getElementById('bg-music');
     window.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-      }
-    });
-    window.addEventListener('touchstart', () => {
       if (audio.paused) {
         audio.play();
       }
@@ -574,5 +648,3 @@
   </script>
 </body>
 </html>
-
-
