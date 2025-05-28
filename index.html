@@ -3,11 +3,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8"/>
-  <title>Happy Birthday Jessica 🎂</title>
+  <title>Pastel Feliz Cumpleaños Jessica</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
-      /* Fondo de corazones */
       background: url('https://img.freepik.com/vector-gratis/tema-san-valentin-corazones-cielo-rosa_1308-38030.jpg?semt=ais_hybrid&w=740') no-repeat center center;
       background-size: cover;
       background-attachment: fixed;
@@ -16,11 +15,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Segoe UI', Verdana, Arial, sans-serif;
-      text-align: center;
       overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
       position: relative;
     }
+    /* Card de pastel */
     .cake-card {
       background: #18171c;
       border-radius: 32px;
@@ -36,7 +36,7 @@
       position: relative;
       overflow: hidden;
       justify-content: flex-end;
-      z-index: 10;
+      z-index: 1000;
     }
     /* Globos */
     .balloon {
@@ -272,6 +272,26 @@
       80% { transform: scaleY(1.04) scaleX(0.98) rotate(-2deg);}
       100% { transform: scaleY(1.07) scaleX(1.09) rotate(3deg);}
     }
+    /* Mensajes flotantes */
+    .text-bubble {
+      position: absolute;
+      font-size: 18px;
+      font-family: 'Cursive', sans-serif;
+      color: #d63384;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px 20px;
+      border-radius: 25px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      animation: floatText 8s ease-in-out forwards;
+      white-space: nowrap;
+      z-index: 10001;
+      pointer-events: none;
+    }
+    @keyframes floatText {
+      0% { opacity: 0; transform: scale(0.5) translateY(0px); }
+      50% { opacity: 1; transform: scale(1.2) translateY(-50px); }
+      100% { opacity: 0; transform: scale(1) translateY(-100px); }
+    }
     /* Responsive */
     @media (max-width: 600px) {
       .cake-card { min-width: 94vw; }
@@ -283,15 +303,12 @@
   </style>
 </head>
 <body>
-  <!-- MÚSICA DE FONDO (no visible) -->
-  <audio id="bg-music" autoplay loop>
-    <source src="audio/See_you_again.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
-  </audio>
-  <!-- TARJETA DE PASTEL -->
   <div class="cake-card" id="cake-card">
+    <!-- Fuegos artificiales -->
     <canvas class="firework-canvas"></canvas>
+    <!-- Globos animados -->
     <div class="cake">
+      <!-- Capa superior -->
       <div class="cake-layer top-layer">
         <div class="velas">
           <div class="vela"><div class="llama"><div class="flama"></div></div></div>
@@ -300,6 +317,7 @@
         <div class="drip-top"></div>
         <div class="cake-text-top">Happy</div>
       </div>
+      <!-- Capa media -->
       <div class="cake-layer middle-layer">
         <div class="drip-mid"></div>
         <div class="cake-text-mid">Birthday</div>
@@ -307,6 +325,7 @@
         <div class="cherry cherry ch2"><div class="cherry stem"></div></div>
         <div class="cherry cherry ch3"><div class="cherry stem"></div></div>
       </div>
+      <!-- Capa inferior -->
       <div class="cake-layer bottom-layer">
         <div class="drip-bot"></div>
         <div class="cake-text-bot">Jessica</div>
@@ -317,6 +336,56 @@
     <div class="cake-plate"></div>
   </div>
   <script>
+    // MENSAJES FLOTANTES
+    const messages = [
+      "Feliz cumpleaños Jessica ❤️",
+      "Eres increíble ✨",
+      "Que tu día esté lleno de amor 💖",
+      "Brilla siempre, Jessica",
+      "Un abrazo enorme en tu día",
+      "Sigue sonriendo 😊",
+      "Hoy celebramos tu alegría",
+      "Eres un regalo para todos",
+      "Brilla con luz propia",
+      "Mi corazón es tuyo 💘"
+    ];
+    function isInsideCard(x, y) {
+      const card = document.getElementById('cake-card');
+      const rect = card.getBoundingClientRect();
+      // Ajustar margen para que no toque el borde
+      return (
+        x + 180 > rect.left && x < rect.right &&
+        y + 60 > rect.top && y < rect.bottom
+      );
+    }
+    function createTextBubble() {
+      const bubble = document.createElement("div");
+      bubble.className = "text-bubble";
+      bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+      let tries = 0;
+      let x, y;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      do {
+        // Generar random en el 0-90% del ancho y 0-85% del alto para que no se salga
+        x = Math.random() * (vw - 230);
+        y = Math.random() * (vh - 90);
+        tries++;
+        // Si después de muchos intentos no encuentra un lugar, lo pone en la esquina arriba
+        if (tries > 16) { x = 25; y = 25; break; }
+      } while (isInsideCard(x, y));
+
+      bubble.style.left = `${x}px`;
+      bubble.style.top = `${y}px`;
+      document.body.appendChild(bubble);
+      setTimeout(() => {
+        bubble.remove();
+      }, 8000);
+    }
+    setInterval(createTextBubble, 1300);
+
     // GLOBOS DENTRO DEL CUADRO
     const colors = ['#ff507c','#ffae3b','#71d1f5','#d866fe','#fae661','#60db95','#e86464','#a59df9'];
     function createBalloon() {
@@ -339,7 +408,7 @@
       let bottom = -60;
       let opacity = 0.97;
       let t = 0;
-      let maxHeight = cardRect.height - 130 - Math.random()*40; // altura random, no sobrepasa el card
+      let maxHeight = cardRect.height - 130 - Math.random()*40;
       function float() {
         t += 1;
         bottom += 1.2 + Math.sin(t/10)*0.4;
@@ -350,7 +419,6 @@
         requestAnimationFrame(float);
       }
       float();
-      // Se elimina después de unos segundos por seguridad
       setTimeout(()=>{ if (balloon.parentNode) balloon.remove(); }, 8200);
     }
     setInterval(createBalloon, 1100);
@@ -494,14 +562,6 @@
       requestAnimationFrame(animateFireworks);
     }
     animateFireworks();
-
-    // Habilita autoplay en algunos dispositivos al tocar/click
-    const audio = document.getElementById('bg-music');
-    window.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-      }
-    });
   </script>
 </body>
 </html>
