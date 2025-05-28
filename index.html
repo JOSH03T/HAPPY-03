@@ -22,7 +22,7 @@
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       pointer-events: none;
-      z-index: 2;
+      z-index: 20;
     }
     .text-bubble {
       position: absolute;
@@ -39,7 +39,7 @@
       min-width: 130px;
       width: fit-content;
       word-break: break-word;
-      z-index: 6;
+      z-index: 21;
       border: 2px solid #fbb1de22;
       text-align: left;
     }
@@ -309,7 +309,7 @@
       transform: translateX(-50%);
       z-index: 30;
       cursor: pointer;
-      font-size: 5.4rem;
+      font-size: 6.6rem;
       background: none;
       border: none;
       outline: none;
@@ -359,6 +359,7 @@
       .bottom-layer { width: 65vw; }
       .middle-layer { width: 43vw; }
       .top-layer { width: 28vw; }
+      .gift-btn { font-size: 4.2rem; top: 18px; }
     }
   </style>
 </head>
@@ -449,7 +450,15 @@
       const vw = window.innerWidth, vh = window.innerHeight;
       const maxWidth = Math.min(vw * 0.58, 500);
       const minLeft = 15;
-      const left = Math.random() * (vw - maxWidth - minLeft * 2) + minLeft;
+      // Aleatorio, 50% izquierda 50% derecha
+      let left;
+      if (Math.random() < 0.5) {
+        // Izquierda
+        left = Math.random() * (vw/2 - maxWidth/2 - minLeft*2) + minLeft;
+      } else {
+        // Derecha
+        left = Math.random() * (vw/2 - maxWidth/2 - minLeft*2) + vw/2;
+      }
       bubble.style.left = `${left}px`;
       bubble.style.top = (Math.random() * (vh * 0.39) + 10) + "px";
       const container = document.getElementById("bubbles-text");
@@ -495,10 +504,11 @@
     }
     setInterval(createBalloon, 1100);
 
-    // Fuegos artificiales
+    // --------- Fuegos artificiales con ráfagas ---------
     const canvas = document.querySelector('.firework-canvas');
     const ctx = canvas.getContext('2d');
     let dpr = window.devicePixelRatio || 1;
+
     function resizeCanvas() {
       const rect = canvas.parentElement.getBoundingClientRect();
       canvas.width = rect.width * dpr;
@@ -615,6 +625,7 @@
       }
     }
     let fireworks = [];
+
     function spawnFirework() {
       const rect = canvas.parentElement.getBoundingClientRect();
       const startX = Math.random() * rect.width * 0.4 + rect.width * 0.3;
@@ -623,7 +634,30 @@
       const endY = rect.height * 0.40 + Math.random() * rect.height * 0.18;
       fireworks.push(new Firework(startX*dpr, startY*dpr, endX*dpr, endY*dpr));
     }
-    setInterval(spawnFirework, 1800);
+
+    // --- Oleadas de fuegos artificiales ---
+    let fireworkInterval = null;
+    let normalInterval = 1800;   // tiempo normal (ms)
+    let burstInterval = 450;     // tiempo durante ráfaga
+
+    function startFireworkInterval(ms) {
+      if (fireworkInterval) clearInterval(fireworkInterval);
+      fireworkInterval = setInterval(spawnFirework, ms);
+    }
+
+    // Maneja ráfagas cada cierto tiempo
+    function setupFireworkBursts() {
+      startFireworkInterval(normalInterval);
+      setInterval(() => {
+        // Comienza ráfaga
+        startFireworkInterval(burstInterval);
+        // Dura 3-5 segundos
+        setTimeout(() => {
+          startFireworkInterval(normalInterval);
+        }, 3000 + Math.random() * 2000);
+      }, 10500); // Cada 10.5s hay una ráfaga
+    }
+    setupFireworkBursts();
 
     function animateFireworks() {
       ctx.clearRect(0,0,canvas.width,canvas.height);
